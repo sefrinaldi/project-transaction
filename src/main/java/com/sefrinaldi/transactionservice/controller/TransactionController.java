@@ -18,8 +18,13 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
+    @PostMapping("/checkout-transaction")
+    public Transaction checkoutTransaction() {
+        return transactionService.checkoutTransactionFromCart();
+    }
+
     @PostMapping("/create-transaction")
-    public Transaction createTransaction() {
-        return null;
+    public Transaction createTransaction(@RequestBody List<ProductCartRequestDto> productCartRequestDtos) {
+        return transactionService.createTransaction(productCartRequestDtos);
     }
 }

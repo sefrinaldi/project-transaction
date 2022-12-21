@@ -24,7 +24,7 @@ public class CartService {
             try {
                 ProductDto productDto = productRestClient.getProductByCode(data.getCode());
 
-                Optional<Cart> cartOptional = cartRepository.findByCode(productDto.getCode());
+                Optional<Cart> cartOptional = cartRepository.findByCodeAndStatus(productDto.getCode(), Cart.Status.DEFAULT);
 
                 cartOptional.ifPresentOrElse(cart -> {
                     cart.setTotalProduct(cart.getTotalProduct() + data.getTotalProduct());
